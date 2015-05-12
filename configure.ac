@@ -1,4 +1,4 @@
-AC_INIT([gst-plugin-dvbmediasink],[0.10])
+AC_INIT(gst-plugin-dvbmediasink, 1.0.0, @pli4)
 
 dnl versions of gstreamer and plugins-base
 AC_ARG_WITH(gstversion,
@@ -206,6 +206,11 @@ AC_ARG_WITH(pcm,
 if test "$have_pcm" = "yes"; then
 	AC_DEFINE([HAVE_PCM],[1],[Define to 1 for PCM support])
 fi
+
+AC_ARG_WITH(maxpcmrate,
+	AS_HELP_STRING([--with-maxpcmrate],[Max PCM rate, default is 48000]),
+	[have_maxpcmrate=$withval],[have_maxpcmrate=48000])
+AC_DEFINE_UNQUOTED([MAX_PCM_RATE],["$have_maxpcmrate"],[Max PCM rate])
 
 AC_ARG_WITH(eac3,
 	AS_HELP_STRING([--with-eac3],[support E-AC3 / AC3+ / DDP, yes or no]),
