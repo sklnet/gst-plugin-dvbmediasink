@@ -111,6 +111,8 @@ struct _GstDVBAudioSink
 	gint64 lastpts;
 	gint64 timestamp_offset;
 
+        gboolean use_set_encoding;
+
 	queue_entry_t *queue;
 };
 
