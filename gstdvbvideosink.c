@@ -561,17 +561,6 @@ static gboolean gst_dvbvideosink_event(GstBaseSink *sink, GstEvent *event)
 		}
 		break;
 	}
-	case GST_EVENT_CAPS:
-	{
-		GstCaps *caps;
-		gst_event_parse_caps(event, &caps);
-		if (caps)
-		{
-			ret = gst_dvbvideosink_set_caps(sink, caps);
-			gst_caps_unref(caps);
-		}
-		break;
-	}
 	default:
 		ret = GST_BASE_SINK_CLASS(parent_class)->event(sink, event);
 		break;
@@ -1337,6 +1326,7 @@ static gboolean gst_dvbvideosink_set_caps(GstBaseSink *basesink, GstCaps *caps)
 	GstStructure *structure = gst_caps_get_structure (caps, 0);
 	const char *mimetype = gst_structure_get_name (structure);
 	self->stream_type = STREAMTYPE_UNKNOWN;
+	self->must_send_header = TRUE;
 
 	GST_INFO_OBJECT (self, "caps = %" GST_PTR_FORMAT, caps);
 
